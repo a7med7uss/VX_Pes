@@ -18,6 +18,12 @@
 .ball-curtain{position:fixed;inset:0;z-index:10000;overflow:hidden;display:block;background:radial-gradient(ellipse at 50% 41%,#102c4c,#071327 42%,#02050e 82%);color:#f4f8ff;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:opacity .68s ease,visibility .68s ease}.ball-curtain:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,transparent 16%,#01040c96 100%),linear-gradient(180deg,#02050d28,transparent 40%,#02050d80);pointer-events:none}.curtain-sky{position:absolute;inset:0;overflow:hidden;pointer-events:none}.curtain-beam{position:absolute;top:-7%;height:82%;width:48vw;filter:blur(16px);opacity:.33;transform-origin:top}.beam-a{left:-9%;transform:rotate(-18deg);background:linear-gradient(180deg,#a8dcff55,transparent 90%);clip-path:polygon(36% 0,65% 0,100% 100%,0 100%)}.beam-b{right:-9%;transform:rotate(18deg);background:linear-gradient(180deg,#a8dcff43,transparent 90%);clip-path:polygon(36% 0,65% 0,100% 100%,0 100%)}.curtain-stars{position:absolute;inset:12% 0 18%;opacity:.45;background:radial-gradient(circle at 18% 30%,#a8dcff 0 1px,transparent 2px),radial-gradient(circle at 78% 38%,#8ccfff 0 1.2px,transparent 2px),radial-gradient(circle at 28% 67%,#e0d2b2 0 1px,transparent 2px),radial-gradient(circle at 88% 70%,#9cd7ff 0 1px,transparent 2px)}
 .curtain-heading{position:absolute;z-index:2;top:max(8vh,calc(env(safe-area-inset-top) + 27px));left:15px;right:15px;text-align:center;transition:opacity .3s,transform .6s cubic-bezier(.2,.7,.2,1)}.curtain-kicker{display:inline-block;color:#d8c7a8;font-size:11px;font-weight:900;letter-spacing:.65px;text-shadow:0 0 18px #d8c7a82f}.curtain-heading h2{font-family:"Cairo",Tahoma,sans-serif;margin:9px 0 0;font-size:clamp(25px,7vw,36px);font-weight:900;letter-spacing:-.7px;text-shadow:0 5px 25px #0009}.curtain-heading p{margin:6px 0 0;color:#bad7ef;font-size:12px}.curtain-sphere{position:absolute;left:50%;top:49%;width:min(78vw,390px);aspect-ratio:1;transform:translate(-50%,-50%);filter:drop-shadow(0 26px 30px #0008)}.curtain-sphere:before{content:"";position:absolute;left:12%;right:12%;bottom:-7%;height:15%;border-radius:50%;background:#000a;filter:blur(18px);transform:scaleX(1.1)}.curtain-half{position:absolute;inset:0;transition:transform 1.12s cubic-bezier(.16,.78,.18,1),opacity .65s ease;will-change:transform,opacity}.curtain-half svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 0 27px #1976d21c)}.curtain-left{clip-path:inset(0 50% 0 0);transform-origin:50% 50%}.curtain-right{clip-path:inset(0 0 0 50%);transform-origin:50% 50%}.curtain-seam{position:absolute;z-index:3;left:50%;top:5%;bottom:4%;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,#8dd3ffb0 17%,#f2fbff 50%,#8dd3ffb0 83%,transparent);box-shadow:0 0 11px #1688ff,0 0 29px #1688ff82;transition:opacity .3s,transform .5s;pointer-events:none}.curtain-orbit{position:absolute;z-index:-1;left:-10%;right:-10%;top:12%;height:76%;border:1px solid #9bdbff34;border-radius:50%;pointer-events:none}.orbit-one{transform:rotate(-23deg) scaleY(.86);box-shadow:0 0 20px #1688ff12}.orbit-two{left:-4%;right:-4%;top:17%;height:65%;transform:rotate(22deg) scaleY(.85);border-color:#d8c7a827}.curtain-footer{position:absolute;left:0;right:0;bottom:max(8vh,calc(env(safe-area-inset-bottom) + 36px));display:flex;align-items:center;justify-content:center;gap:11px;color:#c3d9ef;font-size:11px;font-weight:700;letter-spacing:.2px;transition:opacity .3s,transform .5s}.curtain-dot{width:4px;height:4px;border-radius:50%;background:#6dbfff;box-shadow:0 0 10px #4ca8ff}.ball-curtain.opening .curtain-left{transform:translate(-74%,-2%) rotate(-13deg) scale(.92);opacity:.18}.ball-curtain.opening .curtain-right{transform:translate(74%,-2%) rotate(13deg) scale(.92);opacity:.18}.ball-curtain.opening .curtain-seam{opacity:0;transform:translateX(-50%) scaleY(.3)}.ball-curtain.opening .curtain-heading,.ball-curtain.opening .curtain-footer{opacity:0;transform:translateY(-12px)}.ball-curtain.opening{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s ease .48s,visibility 0s linear 1.3s}.ball-curtain.closed{display:none}
 @media(max-height:650px){.curtain-heading{top:calc(env(safe-area-inset-top) + 14px)}.curtain-heading h2{font-size:24px;margin-top:4px}.curtain-heading p{font-size:10px;margin-top:3px}.curtain-sphere{width:min(60vh,290px);top:52%}.curtain-footer{bottom:max(12px,env(safe-area-inset-bottom) + 8px)}}@media(orientation:landscape) and (max-height:550px){.curtain-heading{top:8px}.curtain-heading h2{font-size:20px;margin-top:2px}.curtain-heading p{font-size:10px;margin-top:1px}.curtain-sphere{width:min(60vh,245px);top:54%}.curtain-footer{bottom:8px}}@media(prefers-reduced-motion:reduce){.curtain-half,.curtain-heading,.curtain-footer,.ball-curtain{transition-duration:.15s!important}.ball-curtain.opening .curtain-left{transform:translate(-55%,0)}.ball-curtain.opening .curtain-right{transform:translate(55%,0)}}
+
+/* Audio fallback for browsers that reject the first play() request. */
+.audio-retry{display:none;position:fixed;z-index:12001;left:50%;bottom:max(13px,calc(env(safe-area-inset-bottom) + 13px));transform:translateX(-50%);align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 17px;border:1px solid #8bcfff9c;border-radius:999px;background:linear-gradient(110deg,#0c4f92,#1688ff 52%,#0b4b89);box-shadow:0 10px 35px #0009;color:#fff;font-size:12px;font-weight:900;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.audio-retry.show{display:flex;animation:slideup .25s ease-out}
+.audio-retry:before{content:"";width:7px;height:7px;border-radius:50%;background:#e2f6ff;box-shadow:0 0 10px #9bdcff}
+
 </style>
 </head>
 <body>
@@ -48,7 +54,7 @@
   </section>
   <footer class="bottom"><strong>تطوير : احمد حسين</strong></footer>
 </main>
-<div class="goal-celebration" id="goalCelebration" aria-hidden="true"><div class="goal-scene"><div class="goal-light"></div><div class="goal-crowd"></div><div class="goal-ground"></div><div class="goal-frame"><div class="goal-net"></div></div><div class="shot-ball" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none"><defs><radialGradient id="shotSphere" cx="32%" cy="25%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".72" stop-color="#e7edf2"/><stop offset="1" stop-color="#728396"/></radialGradient></defs><circle cx="60" cy="60" r="50" fill="url(#shotSphere)" stroke="#f2f4f5" stroke-width="2"/><path d="m60 39 19 14-7 22H48l-7-22 19-14Z" fill="#101c2b"/><path d="m60 39-3-21 17-8 17 13-4 20 11 13 18-5 8 17-13 16-20-3-12-14M41 53 22 45 8 58l3 20 18 10 19-13m-7-22-13-9 1-19 18-8 10 11m7 47 1 20-17 13-18-9-1-18m35-20 18-4 13 11-3 21-18 10-14-10m-23-39-7 22 12 16" stroke="#9aa8b8" stroke-width="2"/></svg></div></div><div class="goal-caption"><h2 class="goal-title">جوووول!</h2><p class="goal-subtitle">تم التسجيل بنجاح</p><div class="gold-rule"></div></div></div><audio id="introAudio" src="./StartA.mp3" preload="auto" playsinline></audio><audio id="goalAudio" src="./audio/goal-celebration.mp3" preload="auto" playsinline></audio><div class="notice" id="notice" role="status" aria-live="polite"><strong id="noticeTitle"></strong><p id="noticeText"></p></div>
+<div class="goal-celebration" id="goalCelebration" aria-hidden="true"><div class="goal-scene"><div class="goal-light"></div><div class="goal-crowd"></div><div class="goal-ground"></div><div class="goal-frame"><div class="goal-net"></div></div><div class="shot-ball" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none"><defs><radialGradient id="shotSphere" cx="32%" cy="25%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".72" stop-color="#e7edf2"/><stop offset="1" stop-color="#728396"/></radialGradient></defs><circle cx="60" cy="60" r="50" fill="url(#shotSphere)" stroke="#f2f4f5" stroke-width="2"/><path d="m60 39 19 14-7 22H48l-7-22 19-14Z" fill="#101c2b"/><path d="m60 39-3-21 17-8 17 13-4 20 11 13 18-5 8 17-13 16-20-3-12-14M41 53 22 45 8 58l3 20 18 10 19-13m-7-22-13-9 1-19 18-8 10 11m7 47 1 20-17 13-18-9-1-18m35-20 18-4 13 11-3 21-18 10-14-10m-23-39-7 22 12 16" stroke="#9aa8b8" stroke-width="2"/></svg></div></div><div class="goal-caption"><h2 class="goal-title">جوووول!</h2><p class="goal-subtitle">تم التسجيل بنجاح</p><div class="gold-rule"></div></div></div><audio id="introAudio" src="/StartA.mp3" preload="auto" playsinline webkit-playsinline></audio><audio id="goalAudio" src="./audio/goal-celebration.mp3" preload="auto" playsinline></audio><div class="notice" id="notice" role="status" aria-live="polite"><strong id="noticeTitle"></strong><p id="noticeText"></p></div><button class="audio-retry" id="audioRetryBtn" type="button">تشغيل صوت البداية</button>
 <div class="ball-curtain" id="ballCurtain" role="button" tabindex="0" aria-label="المس الكرة لفتح الستارة">
 <div class="curtain-sky" aria-hidden="true"><i class="curtain-beam beam-a"></i><i class="curtain-beam beam-b"></i><i class="curtain-stars"></i></div>
 <div class="curtain-heading"><span class="curtain-kicker">مسابقة بيس VX</span><h2>الملعب مستنيك</h2><p>المس الكرة وافتح الستارة</p></div>
@@ -65,19 +71,79 @@
   const goalAudio = $("goalAudio");
   const ballCurtain = $("ballCurtain");
   const passVideo = $("passVideo");
+  const audioRetryBtn = $("audioRetryBtn");
   let curtainOpened = false;
+  let introAudioStarted = false;
   let noticeTimer;
+  let audioRetryTimer = 0;
+
+  function hideAudioRetry() {
+    if (audioRetryBtn) audioRetryBtn.classList.remove("show");
+    clearTimeout(audioRetryTimer);
+  }
+
+  function showAudioRetrySoon() {
+    clearTimeout(audioRetryTimer);
+    audioRetryTimer = window.setTimeout(() => {
+      if (!introAudioStarted && audioRetryBtn) {
+        audioRetryBtn.textContent = "تشغيل صوت البداية";
+        audioRetryBtn.classList.add("show");
+      }
+    }, 1650);
+  }
+
+  // Called synchronously from a real user gesture; do not await anything before play().
+  function tryStartIntroAudio() {
+    if (!introAudio || introAudioStarted) return;
+    if (!introAudio.paused && !introAudio.ended) {
+      introAudioStarted = true;
+      hideAudioRetry();
+      return;
+    }
+    introAudio.muted = false;
+    introAudio.volume = 1;
+    if (introAudio.ended) {
+      try { introAudio.currentTime = 0; } catch (error) {}
+    }
+    try {
+      const playback = introAudio.play();
+      if (playback && typeof playback.then === "function") {
+        playback.then(() => {
+          introAudioStarted = true;
+          hideAudioRetry();
+        }).catch(error => {
+          console.warn("StartA.mp3 playback was blocked:", error?.name || "playback error");
+          showAudioRetrySoon();
+        });
+      } else {
+        introAudioStarted = true;
+        hideAudioRetry();
+      }
+    } catch (error) {
+      console.warn("StartA.mp3 could not start:", error?.name || "playback error");
+      showAudioRetrySoon();
+    }
+  }
+
+  introAudio?.addEventListener("playing", () => {
+    introAudioStarted = true;
+    hideAudioRetry();
+  });
+  introAudio?.addEventListener("error", () => {
+    console.warn("StartA.mp3 failed to load:", introAudio.error?.code || "unknown media error");
+    showAudioRetrySoon();
+  });
 
   function openBallCurtain() {
+    // Even if the curtain handler ran once, later trusted gestures may retry audio
+    // if the browser rejected the initial playback request.
+    tryStartIntroAudio();
     if (curtainOpened) return;
     curtainOpened = true;
-    if (introAudio) {
-      introAudio.volume = 1;
-      try { introAudio.currentTime = 0; } catch (error) {}
-      try { const playback = introAudio.play(); if (playback && typeof playback.catch === "function") playback.catch(() => {}); } catch (error) {}
-    }
     ballCurtain.classList.add("opening");
     ballCurtain.setAttribute("aria-hidden", "true");
+
+    // Load the looping video only after the visitor enters, saving initial mobile data.
     if (passVideo && !passVideo.src) {
       passVideo.src = passVideo.dataset.src;
       passVideo.load();
@@ -86,14 +152,30 @@
       ).catch(() => $("passLoop").classList.add("video-error"));
       passVideo.addEventListener("loadeddata", startVideo, { once: true });
       passVideo.addEventListener("error", () => $("passLoop").classList.add("video-error"), { once: true });
-      window.setTimeout(() => { if (passVideo.readyState < 2) $("passLoop").classList.add("video-error"); }, 8000);
+      window.setTimeout(() => {
+        if (passVideo.readyState < 2) $("passLoop").classList.add("video-error");
+      }, 8000);
     }
     window.setTimeout(() => ballCurtain.classList.add("closed"), 1450);
   }
 
   ballCurtain.addEventListener("pointerdown", openBallCurtain, { passive: true });
+  // iOS/Safari fallback paths: retry directly during touch release/click if pointerdown was denied.
+  ballCurtain.addEventListener("touchend", tryStartIntroAudio, { passive: true });
+  ballCurtain.addEventListener("click", tryStartIntroAudio);
   ballCurtain.addEventListener("keydown", event => {
-    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openBallCurtain(); }
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      tryStartIntroAudio();
+      openBallCurtain();
+    }
+  });
+  audioRetryBtn?.addEventListener("click", () => {
+    tryStartIntroAudio();
+    if (!introAudioStarted) {
+      audioRetryBtn.textContent = "اضغط مرة أخرى لتشغيل الصوت";
+      showAudioRetrySoon();
+    }
   });
 
   const arabicDigits = (s) => s.replace(/[٠-٩۰-۹]/g, c => {
