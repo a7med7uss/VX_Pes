@@ -24,26 +24,38 @@
 .audio-retry.show{display:flex;animation:slideup .25s ease-out}
 .audio-retry:before{content:"";width:7px;height:7px;border-radius:50%;background:#e2f6ff;box-shadow:0 0 10px #9bdcff}
 
+
+/* Local MVideo.mp4 sits directly between the hero copy and registration form. */
+.video-section{position:relative;width:100%;margin:12px 0 18px;isolation:isolate}
+.video-section .pass-loop{position:relative;inset:auto;z-index:1;width:100%;height:auto;aspect-ratio:16/9;min-height:150px;max-height:238px;overflow:hidden;border:1px solid #8fcfff42;border-radius:19px;background:radial-gradient(ellipse at 50% 45%,#12365a 0%,#07162c 70%,#020611 100%);box-shadow:0 15px 38px #0006,0 0 28px #1988ff10,inset 0 1px #fff1;isolation:isolate}
+.video-section .pass-video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;opacity:0;filter:brightness(.9) contrast(1.04) saturate(.88);background:transparent;transition:opacity .3s}
+.video-section .pass-loop.video-ready .pass-video{opacity:1}
+.video-section .pass-video-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#06152c18,transparent 45%,#02071338);z-index:1}
+.video-section .pass-loading{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 43%,#12365a 0%,#07162c 68%,#020611 100%);transition:opacity .25s;pointer-events:none}
+.video-section .pass-loading span{width:24px;height:24px;border:2px solid #79c4ea45;border-top-color:#4ca8ff;border-radius:50%;animation:videoLoadingSpin .8s linear infinite}
+.video-section .pass-loop.video-ready .pass-loading,.video-section .pass-loop.video-error .pass-loading{opacity:0}
+.video-section .pass-loop.video-error .pass-loading span{display:none}
+@keyframes videoLoadingSpin{to{transform:rotate(360deg)}}
+@media(max-height:740px){.video-section{margin:8px 0 12px}.video-section .pass-loop{max-height:200px;min-height:135px}}
+@media(orientation:landscape) and (max-height:560px){.video-section .pass-loop{max-height:150px;min-height:105px}.video-section{margin:4px 0 8px}}
+@media(prefers-reduced-motion:reduce){.video-section .pass-loading span{animation:none}}
+
 </style>
 </head>
 <body>
 <main class="shell" id="shell">
   <header class="topbar"><div class="brand brand-centered"><span>مسابقة بيس VX</span></div></header>
   <section class="hero">
-    <div class="eyebrow">ملعب واحد · بطل واحد</div>
     <h1>مستعد تثبت<br><span class="accent">إنك الأفضل؟</span></h1>
     <p class="hero-copy">المنافسة مش كلام... <strong>ورّينا مهارتك</strong><br>وسجّل اسمك في تحدي بيس.</p>
   </section>
-  <section class="stadium" aria-label="ملعب كرة قدم بإضاءة خضراء">
-    <div class="light left"></div><div class="light right"></div><div class="stand"></div>
-    <div class="pitch"><div class="goal top"></div><div class="goal bottom"></div><div class="circle"></div></div>
+  <section class="video-section" aria-label="شخصان يلعبان بيس">
     <div class="pass-loop" id="passLoop">
-<video id="passVideo" class="pass-video" muted loop playsinline webkit-playsinline preload="none" aria-label="لاعبان يتبادلان تمرير الكرة" data-src="https://assets.mixkit.co/videos/preview/mixkit-soccer-team-crossing-the-ball-on-a-court-in-the-street-42536-large.mp4"></video>
-<div class="pass-video-shade"></div>
-<div class="pass-fallback" aria-hidden="true"><div class="fallback-player player-one"><i class="fallback-head"></i><i class="fallback-body"></i><i class="fallback-leg leg-a"></i><i class="fallback-leg leg-b"></i></div><div class="fallback-player player-two"><i class="fallback-head"></i><i class="fallback-body"></i><i class="fallback-leg leg-a"></i><i class="fallback-leg leg-b"></i></div><i class="fallback-ball"></i></div>
-<div class="pass-caption" aria-hidden="true"><span>كرة واحدة</span><i></i><span>مهارة بلا حدود</span></div></div><div class="sparks"><i class="spark"></i><i class="spark"></i><i class="spark"></i><i class="spark"></i></div>
-  
-  
+      <video id="passVideo" class="pass-video" muted loop playsinline webkit-playsinline preload="none" aria-label="شخصان يلعبان بيس أمام الشاشة" data-src="/MVideo.mp4"></video>
+      <div class="pass-video-shade"></div>
+      <div class="pass-loading" id="passLoading" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
   <section class="register-card" id="register">
     <form id="registerForm" novalidate>
       <div class="field"><label for="fullName">الاسم الثلاثي</label><div class="input-wrap"><svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg><input id="fullName" name="fullName" autocomplete="name" placeholder="اكتب اسمك الثلاثي" maxlength="100" required></div><div class="field-error" id="nameError">اكتب الاسم الأول واسم الأب واسم العائلة.</div></div>
@@ -143,17 +155,19 @@
     ballCurtain.classList.add("opening");
     ballCurtain.setAttribute("aria-hidden", "true");
 
-    // Load the looping video only after the visitor enters, saving initial mobile data.
-    if (passVideo && !passVideo.src) {
-      passVideo.src = passVideo.dataset.src;
-      passVideo.load();
+    // Load the user's compressed local video only after the curtain opens.
+    if (passVideo && !passVideo.getAttribute("src")) {
+      const passLoop = $("passLoop");
       const startVideo = () => passVideo.play().then(
-        () => $("passLoop").classList.add("video-ready")
-      ).catch(() => $("passLoop").classList.add("video-error"));
+        () => passLoop.classList.add("video-ready")
+      ).catch(() => passLoop.classList.add("video-error"));
+      // Bind media listeners before assigning/loading the source to avoid a fast-cache race.
       passVideo.addEventListener("loadeddata", startVideo, { once: true });
-      passVideo.addEventListener("error", () => $("passLoop").classList.add("video-error"), { once: true });
+      passVideo.addEventListener("error", () => passLoop.classList.add("video-error"), { once: true });
+      passVideo.src = passVideo.dataset.src || "/MVideo.mp4";
+      passVideo.load();
       window.setTimeout(() => {
-        if (passVideo.readyState < 2) $("passLoop").classList.add("video-error");
+        if (passVideo.readyState < 2) passLoop.classList.add("video-error");
       }, 8000);
     }
     window.setTimeout(() => ballCurtain.classList.add("closed"), 1450);
