@@ -2,7 +2,7 @@
 // Set GOOGLE_SCRIPT_URL in Vercel Project Settings > Environment Variables.
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store, max-age=0");
-  const endpoint = process.env.GOOGLE_SCRIPT_URL;
+  const endpoint = process.env.GOOGLE_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbyYxJsA1tJrDjLghbMgll17AgjERjCZMAjIdR9AktQopkj1NoWo6j2ouHxXIXQRtX5mYw/exec";
 
   if (req.method === "GET") {
     if (!endpoint || !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(endpoint)) {
